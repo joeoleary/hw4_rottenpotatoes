@@ -43,9 +43,7 @@ Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
     flunk "Didn't find '#{e2}'"
   end
 
-  if p2 < p1
-    flunk "Incorrect sequence (found '#{e1}' at position #{p1} and '#{e2}' at position #{p2}"
-  end 
+  assert(p1 < p2, "Incorrect sequence (found '#{e1}' at position #{p1} and '#{e2}' at position #{p2})")
 end
 
 # Make it easier to express checking or unchecking several boxes at once
@@ -58,9 +56,9 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
   rating_list.delete(" ").split(",").each do |rating|
     if uncheck
-      Step %{I uncheck "ratings_#{rating}"}
+      step %{I uncheck "ratings_#{rating}"}
     else
-      Step %{I check "ratings_#{rating}"}
+      step %{I check "ratings_#{rating}"}
     end
   end
 end
