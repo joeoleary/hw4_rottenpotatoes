@@ -5,21 +5,8 @@ Given /the following movies exist/ do |movies_table|
     # each returned element will be a hash whose key is the table header.
     # you should arrange to add that movie to the database here.
 
-    myMovie = Movie.find_by_title(movie["title"])
-
-    if myMovie == nil
-      myMovie = Movie.new
-
-      myMovie.save
-    end
-
-    movie.each do |field, value|
-
-      myMovie.update_column(field, value)
-
-    end
-
-    myMovie.save
+    # This is the same approach that rate db:seed uses, supply a hash with column names and values
+    Movie.create!(movie)
   end
   #flunk "Unimplemented"
 end
@@ -35,13 +22,8 @@ Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   p1 = page.body.index(e1)
   p2 = page.body.index(e2)
 
-  if !p1
-    flunk "Didn't find '#{e1}'"
-  end
-
-  if !p2
-    flunk "Didn't find '#{e2}'"
-  end
+  assert(p1, "Didn't find '#{e1}'")
+  assert(p2, "Didn't find '#{e2}'")
 
   assert(p1 < p2, "Incorrect sequence (found '#{e1}' at position #{p1} and '#{e2}' at position #{p2})")
 end
