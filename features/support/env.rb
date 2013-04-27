@@ -6,6 +6,11 @@
 
 require 'cucumber/rails'
 
+# Add as per instructions in homework 4
+# When running 'rake spec', this should create a coverage report in coverage/ directory
+require 'simplecov'
+SimpleCov.start 'rails'
+
 # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
 # order to ease the transition to Capybara we set the default here. If you'd
 # prefer to use XPath just remove this line and adjust any selectors in your
