@@ -63,3 +63,13 @@ Then /I should see all of the movies/ do
     flunk "Not all movies displayed (found '#{c1}', expected #{c2}"
   end 
 end
+
+# Check that a movie has the correct director
+
+Then /the director of "(.*)" should be "(.*)"/ do |movie,director|
+  p1 = page.body.index(movie)
+  p2 = page.body.index(director)
+
+  assert(p1, "Didn't find movie '#{movie}'")
+  assert(p2, "Didn't find director'#{director}'")
+end
